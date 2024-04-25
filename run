@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+
+export MAGNET_SETTINGS="$(cat magnet-settings.json)"
+docker compose up

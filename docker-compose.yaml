@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: pgvector/pgvector:0.6.2-pg16
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready']
+      interval: 6s
+      timeout: 5s
+      retries: 5
+    environment:
+      PGUSER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: magnet
+    ports:
+      - 5432:5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - magnet_postgres_data:/var/lib/postgresql/data
+
+  magnet:
+    image: toolkitai/magnet
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_PRISMA_URL: postgres://postgres:postgres@postgres/magnet
+      POSTGRES_URL_NON_POOLING: postgres://postgres:postgres@postgres/magnet
+      MAGNET_SETTINGS: ${MAGNET_SETTINGS}
+    ports:
+      - '4000:4000'
+
+volumes:
+  magnet_postgres_data:

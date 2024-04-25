@@ -1,0 +1,10 @@
+{
+  "repositories": [{ "name": "" }],
+  "userId": "",
+  "projectId": "",
+  "orgId": "",
+  "apiKeys": [""],
+  "openaiApiKey": "",
+  "githubPersonalAccessToken": "",
+  "githubWebhookSecret": ""
+}
