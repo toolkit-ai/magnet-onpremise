@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "Enter the URL of your GitHub repo:"
+read repo_name
+echo "Enter your OpenAI API key:"
+read openai_api_key
+
+json_data=$(jq -n \
+  --arg repo_name "$repo_name" \
+  --arg openai_api_key "$openai_api_key" \
+  '{
+    "repositories": [{ "name": $repo_name }],
+    "userId": "user",
+    "projectId": "project",
+    "orgId": "org",
+    "apiKeys": ["abc123"],
+    "openaiApiKey": $openai_api_key,
+    "githubPersonalAccessToken": "",
+    "githubWebhookSecret": ""
+  }' | jq '.' --indent 2)
+
+echo "$json_data" > magnet-settings.json

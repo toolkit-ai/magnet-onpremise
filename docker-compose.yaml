@@ -15,8 +15,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - magnet_postgres_data:/var/lib/postgresql/data
+      - magnet_onpremise_postgres:/var/lib/postgresql/data
 
   magnet:
     image: toolkitai/magnet
@@ -31,4 +30,4 @@ services:
       - '4000:4000'
 
 volumes:
-  magnet_postgres_data:
+  magnet_onpremise_postgres:
