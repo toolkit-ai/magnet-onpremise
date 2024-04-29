@@ -26,8 +26,9 @@ services:
       POSTGRES_PRISMA_URL: postgres://postgres:postgres@postgres/magnet
       POSTGRES_URL_NON_POOLING: postgres://postgres:postgres@postgres/magnet
       MAGNET_SETTINGS: ${MAGNET_SETTINGS}
+      NODE_ENV: production
     ports:
-      - '4000:4000'
+      - 4000:4000
 
 volumes:
   magnet_onpremise_postgres:
