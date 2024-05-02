@@ -5,10 +5,13 @@ echo "Enter the URL of your GitHub repo:"
 read repo_name
 echo "Enter your OpenAI API key:"
 read openai_api_key
+echo "If this is a private repo, enter your GitHub personal access token. If not, just leave blank:"
+read github_access_token
 
 json_data=$(jq -n \
   --arg repo_name "$repo_name" \
   --arg openai_api_key "$openai_api_key" \
+  --arg github_access_token "$github_access_token" \
   '{
     "repositories": [{ "name": $repo_name }],
     "userId": "user",
@@ -16,7 +19,7 @@ json_data=$(jq -n \
     "orgId": "org",
     "apiKeys": ["abc123"],
     "openaiApiKey": $openai_api_key,
-    "githubPersonalAccessToken": "",
+    "githubPersonalAccessToken": $github_access_token,
     "githubWebhookSecret": ""
   }' | jq '.' --indent 2)
 
