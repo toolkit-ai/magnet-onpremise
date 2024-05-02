@@ -20,8 +20,7 @@ Wait for log output that indicates the server is listening:
 Now you can send requests to the locally running server. A basic chat request would look like this:
 
 ```
-POST https://localhost:4000/chat?noStream=1
-{
-  "prompt": "Explain how dependency injection is implemented in the Utilities class."
-}
+curl -v -X POST https://localhost:4000/chat?noStream=1 \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "Explain how dependency injection is implemented in the Utilities class."}'
 ```
