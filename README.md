@@ -24,3 +24,14 @@ curl -v -X POST http://localhost:4000/chat?noStream=1 \
   -H "Content-Type: application/json" \
   -d '{"prompt": "Explain how dependency injection is implemented in the Utilities class."}'
 ```
+
+## Options
+
+Run with the `--debug` flag to print extra debug information to the console.
+
+Run with the `--reset` flag to clear the internal database and start fresh.
+
+Example:
+```
+./magnet-onpremise/run --reset
+```

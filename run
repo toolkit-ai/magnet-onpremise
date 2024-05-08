@@ -6,5 +6,18 @@ if [ ! -f magnet-settings.json ]; then
 fi
 export MAGNET_SETTINGS="$(cat magnet-settings.json)"
 
+debug=false
+reset=false
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --debug) debug=true ;;
+        --reset) reset=true ;;
+        *) echo "Unknown flag: $1" >&2; exit 1 ;;
+    esac
+    shift
+done
+export DEBUG=$debug
+export RESET=$reset
+
 docker compose pull
-docker compose up
+docker compose up --no-attach postgres
